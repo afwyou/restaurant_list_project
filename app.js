@@ -2,6 +2,7 @@ const express = require('express')
 const port = 3000
 const app = express()
 const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const restaurantList = require('./restaurant.json')
 mongoose.connect('mongodb://localhost/restaurant-list')
@@ -12,6 +13,7 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 //告訴express靜態檔案在哪裡
 app.use(express.static('public'))
+app.use((bodyParser.urlencoded({ extended: true })))
 
 //取得資料庫連線狀態
 const db = mongoose.connection
