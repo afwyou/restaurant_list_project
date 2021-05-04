@@ -45,6 +45,23 @@ app.get('/search', (req, res) => {
   res.render('index', { restaurant: restaurants })
 })
 
+//新增資料(導向新增頁面)
+
+app.get('/create', (req, res) => {
+  return res.render('new')
+})
+
+//新增資料（操作資料庫 > 返回主頁）
+app.post('/create/new', (req, res) => {
+  const restaurant = req.body
+  console.log(restaurant)
+  return Restaurant.create(restaurant)
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+
+})
+
+
 app.listen(port, () => {
   console.log('Listen to the http://localhost:3000')
 })
