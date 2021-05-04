@@ -23,7 +23,7 @@
       <div class="card-columns">
 
         {{#each restaurant}}
-        <a href="/restaurant/{{this.id}}" class="text-secondary">
+        <a href="/restaurant/{{this._id}}" class="text-secondary">
           {{!-- 找到根目錄裡面的restaurant檔案，each restaurant 指定到restaurantList.results的每一個餐廳 --}}
           <div class="card mb-3">
             <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">

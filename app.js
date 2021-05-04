@@ -34,9 +34,13 @@ app.get('/', (req, res) => {
     .catch(error => console.log(error))
 })
 //瀏覽餐廳細節
-app.get('/restaurant/:restaurant_id', (req, res) => {
-  const restaurants = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-  res.render('show', { restaurant: restaurants })
+app.get('/restaurant/:id', (req, res) => {
+  // const restaurants = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
+  // res.render('show', { restaurant: restaurants })
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('show', { restaurant }))
 })
 //搜尋餐廳
 app.get('/search', (req, res) => {
