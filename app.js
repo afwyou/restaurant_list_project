@@ -40,7 +40,7 @@ app.get('/restaurant/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .lean()
-    .then(restaurant => res.render('show', { restaurant }))
+    .then(restaurant => res.render('show', restaurant))
 })
 //搜尋餐廳
 app.get('/search', (req, res) => {
@@ -63,6 +63,25 @@ app.post('/create/new', (req, res) => {
   console.log(restaurant)
   return Restaurant.create(restaurant)
     .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+
+})
+
+//修改餐廳
+app.post('/restaurant/:id/edit', (req, res) => {
+  const id = req.params.id
+  console.log(id)
+  return Restaurant.findById(id)
+    .then(restaurant => {
+      console.log(restaurant)
+      restaurant.name = req.body.name
+      restaurant.category = req.body.category
+      restaurant.location = req.body.location
+      restaurant.phone = req.body.phone
+      restaurant.rating = req.body.rating
+      return restaurant.save()
+    })
+    .then(() => res.redirect(`/restaurant/${id}`))
     .catch(error => console.log(error))
 
 })
