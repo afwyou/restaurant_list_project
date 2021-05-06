@@ -42,12 +42,6 @@
             </div>
           </div>
         </a>
-        {{!-- 新增編輯和刪除按鍵 --}}
-        <div class="card-footer">
-          <form action="/{{ this._id }}/delete" method="POST">
-            <button type="submit" class="edit-btn" id="delete-btn"><i class="far fa-trash-alt"></i></button>
-          </form>
-        </div>
         {{/each}}
 
       </div>
