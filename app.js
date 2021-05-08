@@ -5,6 +5,9 @@ const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const restaurantList = require('./restaurant.json')
+const methodOverride = require('method-override')
+const routes = require('./routes')
+
 mongoose.connect('mongodb://localhost/restaurant-list')
 const Restaurant = require('./models/restaurant')
 
@@ -14,6 +17,8 @@ app.set('view engine', 'handlebars')
 //告訴express靜態檔案在哪裡
 app.use(express.static('public'))
 app.use((bodyParser.urlencoded({ extended: true })))
+app.use(methodOverride('_method'))
+app.use(routes)
 
 //取得資料庫連線狀態
 const db = mongoose.connection
@@ -68,7 +73,7 @@ app.post('/create/new', (req, res) => {
 })
 
 //修改餐廳
-app.post('/restaurant/:id/edit', (req, res) => {
+app.put('/restaurant/:id', (req, res) => {
   const id = req.params.id
   console.log(id)
   return Restaurant.findById(id)
@@ -86,7 +91,7 @@ app.post('/restaurant/:id/edit', (req, res) => {
 
 })
 
-app.post('/:id/delete', (req, res) => {
+app.delete('/restaurant/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
