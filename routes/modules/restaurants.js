@@ -4,8 +4,6 @@ const Restaurant = require('../../models/restaurant')
 
 //瀏覽餐廳細節
 router.get('/:id', (req, res) => {
-  // const restaurants = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-  // res.render('show', { restaurant: restaurants })
   const id = req.params.id
   return Restaurant.findById(id)
     .lean()
@@ -14,10 +12,18 @@ router.get('/:id', (req, res) => {
 //搜尋餐廳
 router.get('/search', (req, res) => {
   const keyword = req.query.keyword
-  const restaurants = restaurantList.results.filter(restaurant => {
-    return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
-  })
-  res.render('index', { restaurant: restaurants })
+  Restaurant.find()
+    .lean()
+    .then(restaurant => {
+      return restaurant.filter(restaurant =>
+        restaurant.name.toLowerCase().includes(keyword)
+        || restaurant.name_en.toLowerCase().includes(keyword)
+        || restaurant.category.toLowerCase().includes(keyword)
+      )
+    })
+    .then(restaurant => res.render('index', { restaurant }))
+    .catch(err => console.log(err))
+
 })
 
 
