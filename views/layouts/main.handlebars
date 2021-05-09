@@ -22,11 +22,12 @@
           我的餐廳清單
         </a>
         {{!-- 新增餐廳按鈕 --}}
-        <div>
-          <form action="/create" method="GET">
-            <button class="edit-btn" type="submit"><i class="mr-1 fas fa-plus"></i>新增餐廳
+        <div class="button">
+          <a href="/restaurants/new">
+            <button class="btn btn-outline-primary mr-2" style="border: none;">
+              <i class="fas fa-plus-circle mr-2"></i>Add
             </button>
-          </form>
+          </a>
         </div>
         {{!-- /新增餐廳按鈕 --}}
       </div>
