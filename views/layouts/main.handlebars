@@ -26,7 +26,15 @@
 
         {{!-- /新增餐廳按鈕 --}}
         {{#if isAuthenticated}}
-        <a href="/users/logout" class="btn btn-outline-info">Logout</a>
+
+        <div class="button">
+          <a href="/restaurants/new">
+            <button class="btn btn-outline-info mr-2" style="border: none;">
+              <i class="fas fa-plus-circle mr-2"></i>Add
+            </button>
+          </a>
+          <a href="/users/logout" class="btn btn-outline-info">Logout</a>
+        </div>
         {{else}}
         <a href="/users/login" class="btn btn-outline-info">Login</a>
         {{/if}}
