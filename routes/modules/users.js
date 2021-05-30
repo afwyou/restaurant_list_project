@@ -8,6 +8,7 @@ router.get('/login', (req, res) => {
 })
 
 router.post('/login', passport.authenticate('local', {
+  //這裡就會經過passport.js的運作
   successRedirect: '/',
   failureRedirect: '/users/login'
 }))
