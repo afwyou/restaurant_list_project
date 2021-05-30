@@ -15,10 +15,10 @@ router.get('/search', (req, res) => {
   Restaurant.find()
     .lean()
     .then(restaurant => {
-      return restaurant.filter(restaurant =>
-        restaurant.name.toLowerCase().includes(keyword)
-        || restaurant.name_en.toLowerCase().includes(keyword)
-        || restaurant.category.toLowerCase().includes(keyword)
+      return restaurant.filter(restaurants =>
+        restaurants.name.toLowerCase().includes(keyword)
+        || restaurants.name_en.toLowerCase().includes(keyword)
+        || restaurants.category.toLowerCase().includes(keyword)
       )
     })
     .then(restaurant => res.render('index', { restaurant }))
