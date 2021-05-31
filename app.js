@@ -12,8 +12,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const routes = require('./routes')
 require('./config/mongoose')
-
-
 const Restaurant = require('./models/restaurant')
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
